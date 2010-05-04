@@ -312,6 +312,27 @@ Element.prototype.offsetRelativeToWindow = function(targetWindow)
     return elementOffset;
 }
 
+KeyboardEvent.prototype.__defineGetter__('character', function getCharacter()
+{
+    var code = parseInt(this.keyIdentifier.slice(2), 16);
+    return String.fromCharCode(code);
+});
+
+Text.prototype.select = function select(start, end)
+{
+    end = end || this.textContent.length;
+    if (start < 0) {
+        start = end + start;
+    }
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    var range = document.createRange();
+    range.setStart(this, start);
+    range.setEnd(this, end);
+    selection.addRange(range);
+    return this;
+};
+
 Node.prototype.isWhitespace = isNodeWhitespace;
 Node.prototype.displayName = nodeDisplayName;
 Node.prototype.isAncestor = function(node)
@@ -632,6 +653,12 @@ HTMLTextAreaElement.prototype.moveCursorToEnd = function()
     this.setSelectionRange(length, length);
 }
 
+Array.convert = function convert(list)
+{
+    // convert array-like object to array
+    return Array.prototype.slice.call(list);
+};
+
 Array.prototype.remove = function(value, onlyFirst)
 {
     if (onlyFirst) {
@@ -655,6 +682,17 @@ Array.prototype.keySet = function()
         keys[this[i]] = true;
     return keys;
 }
+
+Array.prototype.__defineGetter__('last', function getLast()
+{
+    return this[this.length - 1 || 0];
+});
+
+Array.prototype.__defineSetter__('last', function setLast(value)
+{
+    this[this.length - 1 || 0] = value;
+});
+
 
 function insertionIndexForObjectInListSortedByFunction(anObject, aList, aFunction)
 {
