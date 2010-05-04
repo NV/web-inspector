@@ -312,7 +312,7 @@ Element.prototype.offsetRelativeToWindow = function(targetWindow)
     return elementOffset;
 }
 
-KeyboardEvent.prototype.__defineGetter__('character', function getCharacter()
+KeyboardEvent.prototype.__defineGetter__("character", function getCharacter()
 {
     var code = parseInt(this.keyIdentifier.slice(2), 16);
     return String.fromCharCode(code);
@@ -655,9 +655,9 @@ HTMLTextAreaElement.prototype.moveCursorToEnd = function()
 
 Array.convert = function convert(list)
 {
-    // convert array-like object to array
+    // Convert array-like object to array.
     return Array.prototype.slice.call(list);
-};
+}
 
 Array.prototype.remove = function(value, onlyFirst)
 {
@@ -683,12 +683,12 @@ Array.prototype.keySet = function()
     return keys;
 }
 
-Array.prototype.__defineGetter__('last', function getLast()
+Array.prototype.__defineGetter__("last", function getLast()
 {
     return this[this.length - 1 || 0];
 });
 
-Array.prototype.__defineSetter__('last', function setLast(value)
+Array.prototype.__defineSetter__("last", function setLast(value)
 {
     this[this.length - 1 || 0] = value;
 });

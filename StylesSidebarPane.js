@@ -1351,15 +1351,15 @@ WebInspector.StylePropertyTreeElement.prototype = {
 
             replacementString = prefix + number + suffix;
         } else if (/[A-Z-]/.test(event.character)) {
-            setTimeout(function(){
+            setTimeout(function() {
                 var element = event.target;
-                var name = element.querySelector('.name');
-                var value = element.querySelector('.value');
+                var name = element.querySelector(".name");
+                var value = element.querySelector(".value");
                 var property = name.textContent;
-                var new_property = WebInspector.CSS.properties.firstStartsWith(property);
-                var n = property.length - new_property.length;
-                if (new_property != property) {
-                    name.textContent = new_property;
+                var newProperty = WebInspector.CSS.properties.firstStartsWith(property);
+                var n = property.length - newProperty.length;
+                if (newProperty !== property) {
+                    name.textContent = newProperty;
                 }
                 if (n < 0) {
                     name.firstChild.select(n);
