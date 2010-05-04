@@ -1298,8 +1298,6 @@ WebInspector.StylePropertyTreeElement.prototype = {
     {
         var arrowKeyPressed = (event.keyIdentifier === "Up" || event.keyIdentifier === "Down");
         var pageKeyPressed = (event.keyIdentifier === "PageUp" || event.keyIdentifier === "PageDown");
-        if (!arrowKeyPressed && !pageKeyPressed)
-            return;
 
         var selection = window.getSelection();
         if (!selection.rangeCount)
@@ -1315,7 +1313,7 @@ WebInspector.StylePropertyTreeElement.prototype = {
         var replacementString = wordString;
 
         var matches = /(.*?)(-?\d+(?:\.\d+)?)(.*)/.exec(wordString);
-        if (matches && matches.length) {
+        if (arrowKeyPressed || pageKeyPressed && matches && matches.length) {
             var prefix = matches[1];
             var number = parseFloat(matches[2]);
             var suffix = matches[3];
@@ -1352,6 +1350,22 @@ WebInspector.StylePropertyTreeElement.prototype = {
             }
 
             replacementString = prefix + number + suffix;
+        } else if (/[A-Z-]/.test(event.character)) {
+            setTimeout(function(){
+                var element = event.target;
+                var name = element.querySelector('.name');
+                var value = element.querySelector('.value');
+                var property = name.textContent;
+                var new_property = WebInspector.CSS.properties.firstStartsWith(property);
+                var n = property.length - new_property.length;
+                if (new_property != property) {
+                    name.textContent = new_property;
+                }
+                if (n < 0) {
+                    name.firstChild.select(n);
+                }
+            }, 0);
+            return;
         } else {
             // FIXME: this should cycle through known keywords for the current property name.
             return;
