@@ -682,8 +682,6 @@ WebInspector.documentClick = function(event)
 
 WebInspector.documentKeyDown = function(event)
 {
-    if (WebInspector.isEditingAnyField())
-        return;
 
     var isInTextPrompt = event.target.enclosingNodeOrSelfWithClass("text-prompt");
     if (this.currentFocusElement && this.currentFocusElement.handleKeyEvent) {
