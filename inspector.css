@@ -504,27 +504,26 @@ body.drawer-visible #drawer {
 }
 
 .monospace {
-    font-size: 10px;
+    font-size: 11px;
     font-family: monospace;
 }
 
-body.platform-mac .monospace, body.platform-mac .source-code {
+body.platform-mac .monospace {
     font-family: Monaco, monospace;
 }
 
 /* Keep .platform-mac to make the rule more specific than the general one above. */
-body.platform-mac.platform-mac-snowleopard .monospace,
-body.platform-mac.platform-mac-snowleopard .source-code {
+body.platform-mac.platform-mac-snowleopard .monospace {
     font-size: 11px;
     font-family: Menlo, monospace;
 }
 
-body.platform-windows .monospace, body.platform-windows .source-code {
+body.platform-windows .monospace {
     font-size: 12px;
     font-family: Consolas, Lucida Console, monospace;
 }
 
-body.platform-linux .monospace, body.platform-linux .source-code {
+body.platform-linux .monospace {
     font-size: 11px;
     font-family: dejavu sans mono, monospace;
 }
@@ -1131,8 +1130,6 @@ body.platform-linux .monospace, body.platform-linux .source-code {
 }
 
 .source-code {
-    font-family: monospace;
-    font-size: 10px;
     white-space: pre-wrap;
 }
 
