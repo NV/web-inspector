@@ -1354,11 +1354,23 @@ WebInspector.StylePropertyTreeElement.prototype = {
             setTimeout(function() {
                 var element = event.target;
                 var name = element.querySelector(".name");
+                if (!name) {
+                    var property = element.textContent.match(/[^:]+/)[0];
+                    if (property) {
+                        name = document.createElement("span");
+                        name.className = "name";
+                        name.textContent = property;
+                        element.textContent = element.textContent.replace(property, "");
+                        element.insertBefore(name, element.firstChild);
+                    } else {
+                        return;
+                    }
+                }
                 var value = element.querySelector(".value");
                 var property = name.textContent;
                 var newProperty = WebInspector.CSS.properties.firstStartsWith(property);
                 var n = property.length - newProperty.length;
-                if (newProperty !== property) {
+                if (newProperty && newProperty !== property) {
                     name.textContent = newProperty;
                 }
                 if (n < 0) {
