@@ -683,17 +683,6 @@ Array.prototype.keySet = function()
     return keys;
 }
 
-Array.prototype.__defineGetter__("last", function getLast()
-{
-    return this[this.length - 1 || 0];
-});
-
-Array.prototype.__defineSetter__("last", function setLast(value)
-{
-    this[this.length - 1 || 0] = value;
-});
-
-
 function insertionIndexForObjectInListSortedByFunction(anObject, aList, aFunction)
 {
     // indexOf returns (-lowerBound - 1). Taking (-result - 1) works out to lowerBound.
