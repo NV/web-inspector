@@ -1355,15 +1355,19 @@ WebInspector.StylePropertyTreeElement.prototype = {
                 var element = event.target;
                 var name = element.querySelector(".name");
                 if (!name) {
-                    var property = element.textContent.match(/[^:]+/)[0];
-                    if (property) {
-                        name = document.createElement("span");
-                        name.className = "name";
-                        name.textContent = property;
-                        element.textContent = element.textContent.replace(property, "");
-                        element.insertBefore(name, element.firstChild);
-                    } else {
-                        return;
+                    var index = element.textContent.indexOf(':');
+                    if (index >= 0) {
+                        var property = element.textContent.substring(0, index);
+                        if (property) {
+                            // A span.name doesn't yet exist, so lets create one.
+                            name = document.createElement("span");
+                            name.className = "name";
+                            name.textContent = property;
+                            element.textContent = element.textContent.replace(property, "");
+                            element.insertBefore(name, element.firstChild);
+                        } else {
+                            return;
+                        }
                     }
                 }
                 var value = element.querySelector(".value");
