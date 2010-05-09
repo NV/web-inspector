@@ -1369,10 +1369,10 @@ WebInspector.StylePropertyTreeElement.prototype = {
                 var value = element.querySelector(".value");
                 var property = name.textContent;
                 var newProperty = WebInspector.CSS.properties.firstStartsWith(property);
-                var n = property.length - newProperty.length;
                 if (newProperty && newProperty !== property) {
                     name.textContent = newProperty;
                 }
+                var n = property.length - newProperty.length;
                 if (n < 0) {
                     name.firstChild.select(n);
                 }

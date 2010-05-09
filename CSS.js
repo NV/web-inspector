@@ -19,7 +19,7 @@ WebInspector.CSS = {
 
 WebInspector.CSS.properties.startsWith = function startsWith(str)
 {
-    return this.filter(function(property){
+    return this.filter(function(property) {
         return property.indexOf(str) === 0;
     });
 };
